@@ -57,13 +57,14 @@ test_string = "You should be careful with words which second form is the same as
 visualizer(test_string, language = 'english')
 '''
 
-'''
+
 # our data
 seq_df = our_data_to_feature(speech_pts,Speech_controls,patients_info)
 X, Y, features_df = forming_xy(seq_df,X_features)
 classifier_full(X, Y, classifiers)
-'''
 
+
+'''
 # our data, with new predict
 seq_df = our_data_to_feature(speech_pts,Speech_controls,patients_info)
 X, Y, features_df = forming_xy(seq_df,X_features)
@@ -74,7 +75,7 @@ test_string = ' شما بهترین متن عاشقانه بلند، متن بل
 features_new = for_new_data(test_string, patient, language = 'farsi')
 x_new = forming_x(features_new, X_features)
 print(classifier_new_data(best_clf, x_new, best_sc))
-
+'''
 
 '''
 # other data         Input is one csv files on has 'Text', 'Diagnosis', and 'Subject Code'
