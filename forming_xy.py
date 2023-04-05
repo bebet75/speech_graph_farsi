@@ -2,6 +2,7 @@
 import pandas as pd
 
 dir = 'features_mw.csv'
+'''
 X_features = [
     'seq_ad',
     'seq_ns',
@@ -25,7 +26,7 @@ X_features = [
     'cooc_nn',
     'cooc_ne',
     'cooc_ns']
-
+'''
 
 def forming_xy(features, X_features):
     # Converting data (CSV) to dataframe
