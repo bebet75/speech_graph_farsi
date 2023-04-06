@@ -225,10 +225,11 @@ patients_info = 'patients_info.xlsx'
 dir = 'features_mw.csv'
 
 
-
+'''
 seq_df = our_data_POS(speech_pts,Speech_controls,patients_info)
 X, Y, features_df = forming_xy_POS(seq_df,X_features)
 classifier_full(X, Y, classifiers)
+'''
 
 
 '''
