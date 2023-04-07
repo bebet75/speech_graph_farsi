@@ -200,7 +200,7 @@ def forming_x(features, X_features):
 
     return X
 
-
+'''
 X_features = ['PRO_code','N','ADJ','PO','ADV','PRO','V_PR','CON']
 
 classifiers = [
@@ -223,7 +223,7 @@ speech_pts = 'speech-pts.xlsx'
 Speech_controls = 'Speech-controls.xlsx'
 patients_info = 'patients_info.xlsx'
 dir = 'features_mw.csv'
-
+'''
 
 '''
 seq_df = our_data_POS(speech_pts,Speech_controls,patients_info)

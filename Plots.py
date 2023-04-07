@@ -276,12 +276,15 @@ def reg_plot(X,Y):
     elasticNetCoeff.sort_values(by='Coefficient_Abs', ascending=False)
 
 
-def plot_classification_results(clf, X, y, list_of_features):
+def plot_classification(clf, X, y, list_of_features):
     title = ''
     feature1 = list_of_features[0]
     feature2 = list_of_features[1]
+    sc = StandardScaler()
+    
     # Divide dataset into training and testing parts
     X = X[list_of_features]
+    X = pd.DataFrame(sc.fit_transform(X),index=X.index, columns=X.columns)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
     #y=y['diagnosis']=="Schizo"
     # Fit the data with classifier.
@@ -291,11 +294,13 @@ def plot_classification_results(clf, X, y, list_of_features):
     cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA'])
     cmap_bold = ListedColormap(['#FF0000', '#00FF00'])
 
-    h = .01  # step size in the mesh
+    h = .001  # step size in the mesh
     # Plot the decision boundary. For that, we will assign a color to each
     # point in the mesh [x_min, m_max]x[y_min, y_max].
-    x_min, x_max = X[feature1].min() - 0.1, X[feature1].max() + 0.1
-    y_min, y_max = X[feature2].min() - 0.1, X[feature2].max() + 0.1
+    clearance1 = 0.1*(X[feature1].max()-X[feature1].min())
+    x_min, x_max = X[feature1].min() - clearance1, X[feature1].max() + clearance1
+    clearance2 = 0.1*(X[feature2].max()-X[feature2].min())
+    y_min, y_max = X[feature2].min() - clearance2, X[feature2].max() + clearance2
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h),np.arange(y_min, y_max, h))
 
     Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
@@ -319,3 +324,4 @@ def plot_classification_results(clf, X, y, list_of_features):
     #ax.legend(['g','r'],['Control','Schizo'],loc="lower right", title="Classes")
     title = 'Full Data Accuracy : ' + str(round(score1, 2)) + '  /  Test Data Accuracy : ' + str(round(score2, 2))
     plt.title(title)
+
