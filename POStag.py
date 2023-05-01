@@ -96,39 +96,27 @@ def feature_extract_POS(test_string, language = 'farsi'):
     my_tagger = POSTagger(tagging_model="wapiti")  # tagging_model = "wapiti" or "stanford". "wapiti" is faster than "stanford"
     text_tags = my_tagger.parse(my_tokenizer.tokenize_words(test_string))
 
-    po = 0
-    noun = 0
-    adj = 0
-    adv = 0
-    v_pr = 0
-    con = 0
-    pro = 0
+    dict_poses = {}
+    poses = ['N','ADJ','PO','ADV','PRO','V_PR','CON','DELM','DET','V_PA','INT','PP','AR']
+
+    for Pos_end in poses:
+        dict_SOP[Pos_end] = 0
+        dict_poses[Pos_end] = []
 
     for tup in text_tags:
         Pos = tup[1]
-        if Pos == 'ADJ':
-            adj = adj + 1
-        if Pos == 'ADV':
-            adv = adv + 1
-        if Pos == 'N':
-            noun = noun + 1
-        if Pos == 'PO':
-            po = po + 1
-        if Pos == 'V_PR':
-            v_pr = v_pr + 1
-        if Pos == 'CON':
-            con = con + 1
-        if Pos == 'PRO':
-            pro = pro + 1
+        for Pos_end in poses:
+            if Pos == Pos_end:
+                dict_poses[Pos_end].append(tup[0])
+                dict_SOP[Pos_end] = dict_SOP[Pos_end] + 1
+                break
 
-    dict_SOP['ADJ'] = [adj/word_counter]
-    dict_SOP['ADV'] = [adv/word_counter]
-    dict_SOP['N'] = [noun/word_counter]
-    dict_SOP['PO'] = [po/word_counter]
-    dict_SOP['V_PR'] = [v_pr/word_counter]
-    dict_SOP['CON'] = [con/word_counter]
-    dict_SOP['PRO'] = [pro/word_counter]
+    for Pos_end in poses:
+        dict_poses[Pos_end] = sorted(set(dict_poses[Pos_end]))[:10]
+        dict_SOP[Pos_end] = dict_SOP[Pos_end]/word_counter
+
     dict_SOP['PRO_code'] = [word_counter_pro/word_counter]
+    #print(dict_poses)
 
     return dict_SOP
 

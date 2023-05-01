@@ -291,8 +291,8 @@ def plot_classification(clf, X, y, list_of_features):
     clf.fit(X_train, y_train)
 
     # Create color maps
-    cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA'])
-    cmap_bold = ListedColormap(['#FF0000', '#00FF00'])
+    cmap_light = ListedColormap(['#AAFFAA','#FFAAAA'])
+    cmap_bold = ListedColormap(['#00FF00','#FF0000'])
 
     h = .001  # step size in the mesh
     # Plot the decision boundary. For that, we will assign a color to each
