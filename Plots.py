@@ -148,8 +148,8 @@ def Stats(features_df, feature_name):
     x2 = features_df[features_df['diagnosis'] == "Control"][feature_name]
     print('mean_Schz', np.mean(x1))
     print('STD_Schz', np.std(x1))
-    print(np.mean('mean_Cntrl', x2))
-    print(np.std('STD_Cntrl', x2))
+    print('mean_Cntrl', np.mean(x2))
+    print('STD_Cntrl', np.std(x2))
     print('ttest_ind', stats.ttest_ind(a=x1, b=x2, equal_var=True))
     print('kruskal', stats.kruskal(x1, x2))
     print('ranksums', stats.ranksums(x1, x2))
